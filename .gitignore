@@ -2,3 +2,4 @@
 #$ git clean -fX 清除忽略的檔案
 
 env.bat
+*.jpg

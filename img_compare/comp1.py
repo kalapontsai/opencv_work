@@ -3,18 +3,16 @@ import cv2
 import numpy as np
 import matplotlib.pyplot as plt
 
-f1 = 'shape2.jpg'
-f2 = 'shape1.jpg'
-plt.rcParams["figure.figsize"] = [10,10]
-plt.style.use('seaborn-talk')
+f1 = 'p2a.jpg'
+f2 = 'p2b.jpg'
 
 img1BGR = cv2.imread(f1)
-img1RGB = cv2.cvtColor(img1BGR, cv2.COLOR_BGR2RGB) 
-img1Gray = cv2.cvtColor(img1BGR, cv2.COLOR_BGR2GRAY) 
+#img1RGB = cv2.cvtColor(img1BGR, cv2.COLOR_BGR2RGB) 
+#img1Gray = cv2.cvtColor(img1BGR, cv2.COLOR_BGR2GRAY) 
 
 img2BGR = cv2.imread(f2)
-img2RGB = cv2.cvtColor(img2BGR, cv2.COLOR_BGR2RGB) 
-img2Gray = cv2.cvtColor(img2BGR, cv2.COLOR_BGR2GRAY)
+#img2RGB = cv2.cvtColor(img2BGR, cv2.COLOR_BGR2RGB) 
+#img2Gray = cv2.cvtColor(img2BGR, cv2.COLOR_BGR2GRAY)
 
 
 #cv2.calcHist(影像, 通道, 遮罩, 區間數量, 數值範圍)
@@ -25,10 +23,10 @@ hist1 = cv2.calcHist([img1BGR],  # 圖片
                     [0, 256])    # ranges，通常為 [0, 256]
 hist2 = cv2.calcHist([img2BGR],[0],None,[256],[0, 256])
 
-cv2.HISTCMP_CORREL
-cv2.HISTCMP_CHISQR
-cv2.HISTCMP_INTERSECT 
-cv2.HISTCMP_BHATTACHARYYA
+#cv2.HISTCMP_CORREL
+#cv2.HISTCMP_CHISQR
+#cv2.HISTCMP_INTERSECT 
+#cv2.HISTCMP_BHATTACHARYYA
 a = cv2.compareHist(hist1,hist2,cv2.HISTCMP_CORREL)
 
 print ('相似度:',a)

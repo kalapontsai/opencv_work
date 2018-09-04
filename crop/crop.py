@@ -16,14 +16,14 @@ def crop(img_name,x1,x2,y1,y2,img):
 	h = y2 - y1
 	crop_img = img[y1:y2, x1:x2]
 	savejpg(img_name,crop_img)
-	cv2.imshow(img_name,crop_img)
+	#cv2.imshow(img_name,crop_img)
 
 # 取樣方塊的尺寸
-block_x = 800
-block_y = 800
+block_x = 250
+block_y = 250
 
 #原圖檔名
-imgfile = "p1.jpg"
+imgfile = "p2a.jpg"
 
 #檢查目錄是否存在
 save_dir = os.getcwd() + '\\example'
@@ -33,6 +33,7 @@ if not os.path.isdir(save_dir):
 
 img = cv2.imread(imgfile)
 Img = cv2.cvtColor(img,cv2.COLOR_BGR2RGB)
+Img_all = cv2.cvtColor(img,cv2.COLOR_BGR2RGB)
 h, w, _ = img.shape
 
 print ('shape size: %s x %s' % (w,h))
@@ -71,19 +72,20 @@ for x in row :
 		block += 1
 		print ( block,x_begin,y_begin,x_end,y_end )
 		#畫方框
-		cv2.rectangle(Img, (x_begin, y_begin), (x_end, y_end), color_red, 3)
+		cv2.rectangle(Img_all, (x_begin, y_begin), (x_end, y_end), color_red, 4)
 
 		#寫入編號
 		txt_x = x_begin + 15
-		txt_y = y_begin +30
-		cv2.putText(Img, str(block), (txt_x, txt_y), cv2.FONT_HERSHEY_SIMPLEX, 1, color_blue, 1, cv2.LINE_AA)
+		txt_y = y_begin + 15
+		cv2.putText(Img_all, str(block), (txt_x, txt_y), cv2.FONT_HERSHEY_SIMPLEX, 2, color_blue, 5, cv2.LINE_AA)
 		
 		#產生切割圖
-		crop_file = str(os.path.splitext(imgfile)[0]) + '-crop' + str(block)
-		crop(crop_file,x_begin,x_end,y_begin,y_end,Img)
+		
+		#crop_file = str(os.path.splitext(imgfile)[0]) + '-' + str(block)
+		#crop(crop_file,x_begin,x_end,y_begin,y_end,Img)
 
-savejpg(os.path.splitext(imgfile)[0] + '-crop', Img)
-cv2.imshow('show',Img)
+savejpg(os.path.splitext(imgfile)[0] + '-all', Img_all)
+cv2.imshow('show',Img_all)
 cv2.waitKey(0)
 cv2.destroyAllWindows()
 
