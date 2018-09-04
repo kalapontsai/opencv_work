@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 #依照讀取圖檔大小,切割若干大小,並儲存圖檔
 #儲存圖檔為切割後尺寸,非原圖尺寸
+#檔名變數 : p2a-64-1500-750-250-250.jpg  % device-sn-start_x-start_y-width-height.jpg
 import os
 import cv2
 import numpy as np
@@ -15,7 +16,9 @@ def crop(img_name,x1,x2,y1,y2,img):
 	w = x2 - x1
 	h = y2 - y1
 	crop_img = img[y1:y2, x1:x2]
-	savejpg(img_name,crop_img)
+	position = '-' + str(x1) + '-' + str(y1) + '-' + str(w) + '-' + str(h)
+	img_name += position
+	savejpg(img_name,crop_img,)
 	#cv2.imshow(img_name,crop_img)
 
 # 取樣方塊的尺寸
@@ -23,7 +26,7 @@ block_x = 250
 block_y = 250
 
 #原圖檔名
-imgfile = "p2a.jpg"
+imgfile = "p3a.jpg"
 
 #檢查目錄是否存在
 save_dir = os.getcwd() + '\\example'
@@ -81,8 +84,8 @@ for x in row :
 		
 		#產生切割圖
 		
-		#crop_file = str(os.path.splitext(imgfile)[0]) + '-' + str(block)
-		#crop(crop_file,x_begin,x_end,y_begin,y_end,Img)
+		crop_file = str(os.path.splitext(imgfile)[0]) + '-' + str(block)
+		crop(crop_file,x_begin,x_end,y_begin,y_end,Img)
 
 savejpg(os.path.splitext(imgfile)[0] + '-all', Img_all)
 cv2.imshow('show',Img_all)
